@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Input 값으로 리스트 아이템 추가/제거</title>
+</head>
+<body>
+  <input type="text" id="inputField" placeholder="값을 입력하세요">
+  <button onclick="addItem()">추가</button>
+  <button onclick="removeSecondItem()">두 번째 아이템 제거</button>
+
+  <div id="container">
+    <ul id="list">
+    </ul>
+  </div>
+
+  <script>
+    function addItem() {
+      let inputField = document.getElementById('inputField');
+      let list = document.getElementById('list');
+
+      let value = inputField.value;
+      let listItem = document.createElement('li');
+      listItem.appendChild(document.createTextNode(value));
+
+      list.appendChild(listItem);
+
+      inputField.value = ''; // 입력 필드 초기화
+    }
+
+    function removeSecondItem() {
+      let list = document.getElementById('list');
+
+      if (list.children.length >= 2) {
+        list.removeChild(list.children[1]); // 두 번째 아이템 제거
+      } else {
+        console.log("리스트에 제거할 아이템이 없습니다.");
+      }
+    }
+  </script>
+</body>
+</html>

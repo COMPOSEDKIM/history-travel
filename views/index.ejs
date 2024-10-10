@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Website</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+    
+        h1 {
+            color: #ffffff;
+            background-color: #3498db;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 0;
+        }
+        
+        p.description {
+            
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #878689;
+            margin: 0; /* 여백 제거 */
+            background-color: white; /* 배경색을 흰색으로 설정 */
+            padding: 10px;
+        }
+    
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+    
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(25, 10, 60, 0.1);
+            display: flex;
+            align-items: center;
+        }
+    
+        a, span {
+            color: #4a348b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    
+        a:hover, span:hover {
+            text-decoration: underline;
+        }
+    
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+
+        }
+    
+        button:hover {
+            background-color: #2077c8;
+        }
+
+        .review-content {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .review-image {
+            flex: 0 0 100px;
+            height: 100px;
+            border-radius: 5px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .review-title {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .review-author {
+            display: block;
+            margin-top: 10px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Travel Plan</h1><p class="description">Discover amazing travel destinations and read reviews from fellow travelers.</p>
+    <ul>
+        <% for (let i = 0; i < posts.length; i++) { %>
+            <li>
+                <!-- <div class="review-image" style="background-image: url(<%= posts[i].image || 'default.jpg' %>);"></div> -->
+                <div class="review-content">
+                    <a href="/post/<%= i %>" class="review-title">여행지: <%= posts[i].title %></a>
+                    <p class="review-excerpt"><%= posts[i].content ? posts[i].content.substring(0, 100) : '내용이 없습니다.' %>...</p>
+                    <span class="review-author">작성자: <%= posts[i].author %></span>
+                </div>
+            </li>
+        <% } %>
+    </ul>
+
+    <a href="/new"><button type="button">새 게시물 작성</button></a>
+    <script>
+        
+    </script>
+</body>
+</html>

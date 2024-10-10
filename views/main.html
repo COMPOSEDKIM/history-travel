@@ -1,0 +1,31 @@
+<!-- main.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+</head>
+<body>
+
+<div id="content-container">
+    <!-- 내용이 여기에 동적으로 삽입됩니다. -->
+</div>
+
+<script>
+    // JavaScript를 사용하여 AJAX로 external.html 파일을 가져와서 동적으로 로딩합니다.
+    const container = document.getElementById('content-container');
+    const xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            container.innerHTML = this.responseText;
+        }
+    };
+
+    xhttp.open('GET', 'external.html', true);
+    xhttp.send();
+</script>
+
+</body>
+</html>

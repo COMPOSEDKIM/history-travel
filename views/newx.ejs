@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Marker Accessibility</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+  <body>
+    <h1>Plan My Itinerary</h1>
+    <!-- <form action="/new" method="post" enctype="multipart/form-data"></form> -->
+      <!-- <div id="container" class="custom-container">
+        <div id="map" class="custom-map"></div>
+      </div> -->
+
+      <div>
+        <label for="title">Title </label>
+        <input type="text" id="title" name="title" required>
+      </div>
+
+      <div>
+        <label for="author">Author </label>
+        <input type="text" id="author" name="author" required>
+      </div>
+
+
+
+        <!-- <link rel="stylesheet" type="text/css" href="/style.css" />
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXaYwwO82iGqPtEN2-PJi5tKFMwN5VFG4&callback=initMap&libraries=places&v=weekly" defer></script>
+      <script src="/index.js"></script> -->
+
+      <div class="pac-card" id="pac-card">
+        <div>
+          <div id="title">Place Search</div>
+          <div id="type-selector" class="pac-controls" style="display: none;"></div>
+          <br />
+          <div id="strict-bounds-selector" class="pac-controls">
+            <input type="checkbox" id="use-location-bias" value="" checked  style="display: none;"/>
+            
+          </div>
+        </div>
+        <div id="pac-container">
+          <input id="pac-input" type="text" placeholder="Enter a location" />
+        </div>
+
+        
+      </div>
+
+      <div id="container">
+        <div id="Information">
+          <h2>Information</h2>
+          <button id="add">add Marker</button>
+          <div id="imageContainer">
+            <img id="0" src="">
+          </div>
+          <button id="prevBtn" class="hidden">◀ 이전</button>
+          <button id="nextBtn" class="hidden">다음 ▶</button>
+          <p id="1"></p>
+          <p id="2"></p>
+          <p id="3"></p>
+          <p id="4"></p>
+          <p id="5"></p>
+          <p id="6"></p>
+          <p id="7"></p>
+          <p id="8"></p>
+        </div>
+
+        <div id="map"></div>
+        <div id="sidebar" class="moreplan">
+          <select id="selectBox">
+            <option value="D1">day1</option>
+          </select>
+          <label><input type="checkbox" id="Direction" name="option">운전 경로</label>
+          <label><input type="checkbox" id="Walk" name="option">도보 경로</label>
+          <button id="addplan" style="display:inline;">일정 추가</button>
+          <ul id="D1" value="1"></ul>
+
+        </div>
+        <div id="sidebar">
+          <h2>Recommend</h2>
+          <select id="sortR">
+            <option value="default">기본 순</option>
+            <option value="num">별점 높은 순</option>
+            <option value="many">리뷰 많은 순</option>
+          </select>
+          <ul id="places"></ul>
+        </div>
+        <div id="infowindow-content">
+          <span id="place-name" class="title"></span><br />
+          <span id="place-address"></span>
+        </div>
+
+      </div>
+
+      <div id="rightClickMenu">
+        <div class="item" number="1">Near Restaurant</div>
+        <div class="item" number="2">Near Park</div>
+        <div class="item" number="3">Reset</div>
+        <div class="item" number="4">Delete</div>
+      </div>
+
+    <input type="button" value="night" class="dayNightButton" style="display: none;">
+    <input type="button" value="false" class="resetbutton" style="display: none;">
+
+    <div id="result"></div>
+
+      <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXaYwwO82iGqPtEN2-PJi5tKFMwN5VFG4&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+    <!-- <script src="./index.js"></script> -->
+    
+      <!-- // document.addEventListener('DOMContentLoaded', function() {
+      //   displayData();
+      //   console.log('Data before submission:', jsonData);
+      // }); -->
+
+    
+    <button onclick="updateData()">Update Data</button>
+    <!-- 여기에 datas드를 출력하고 가져오기? -->
+      
+      <div class="selected-file" id="selectedFile"></div>
+
+      <button type="button" id="submitBtn">완료</button>
+      <a href="/"><button type="button" class="back-button">이전으로</button></a>
+      <button id="updateDataButton">Update Data</button>
+      <div id="displayData">
+        <h2>Displayed Data</h2>
+        <div>
+          <strong>Test1:</strong> <span id="displayTest1"></span>
+        </div>
+        <div>
+          <strong>Place Name:</strong> <span id="displayPlaceName"></span>
+        </div>
+        <div>
+          <strong>Marker List:</strong> <span id="displayMarkerList"></span>
+        </div>
+        <div>
+          <strong>Waypoints:</strong> <span id="displayWayps"></span>
+        </div>
+      </div>
+      <script src="./index.js"></script>
+      <script>
+          // 전역 스코프에서 jsonData 정의
+        // let jsonData = {
+        //   test1: '',
+        //   placename: '',
+        //   markerlist: '',
+        //   wayps: '',
+        // };
+        // 데이터 업데이트 함수
+        function updateDisplayData() {
+          document.getElementById('displayTest1').textContent = JSON.stringify(jsonData.test1);
+          document.getElementById('displayPlaceName').textContent = JSON.stringify(jsonData.placename);
+          document.getElementById('displayMarkerList').textContent = JSON.stringify(jsonData.markerlist);
+          document.getElementById('displayWayps').textContent = JSON.stringify(jsonData.wayps);
+        }
+      
+        // 페이지 로딩 완료 시 데이터 출력 함수 실행
+        document.addEventListener('DOMContentLoaded', function() {
+          // displayData(); // 이 부분은 필요에 따라 사용하시면 됩니다.
+          console.log('Data before submission:', jsonData);
+        });
+      
+        // submit 버튼 클릭 시 데이터 업데이트 및 화면 갱신
+        document.getElementById('submitBtn').addEventListener('click', () => {
+          // ... (기존 코드)
+      
+          // 데이터 업데이트 함수 호출
+          updateDisplayData();
+        });
+      
+        // 초기 데이터 화면에 표시
+        updateDisplayData();
+      </script>
+
+      <script>
+        // 페이지 로딩 완료 시 데이터 출력 함수 실행
+        document.getElementById('submitBtn').addEventListener('click', () => {
+          const title = document.getElementById('title') ? document.getElementById('title').value : '';
+          const author = document.getElementById('author') ? document.getElementById('author').value: '';
+          // Get array values
+          const test1Element = document.getElementById('test1');
+          const test1 = JSON.parse(test1Element.value);
+
+          const placenameElement = document.getElementById('placename');
+          const placename = JSON.parse(placenameElement.value);
+
+          const markerlistElement = document.getElementById('markerlist');
+          const markerlist = JSON.parse(markerlistElement.value);
+
+          const waypsElement = document.getElementById('wayps');
+          const wayps = JSON.parse(waypsElement.value);
+
+
+          const jsonData ={
+            title,
+            author,
+            test1,
+            placename,
+            markerlist,
+            wayps
+          };
+
+      // JSON 데이터 생성
+          //JSON 데이터 생성
+            // 이후 가져온 데이터를 활용
+          console.log('test1:', test1);
+          console.log('placename:', placename);
+          console.log('markerlist:', markerlist);
+          console.log('ways:', wayps);
+
+          // fetch를 호출하고 응답을 처리하는 부분
+          fetch('/new', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData)
+            // body: JSON.stringify({ title, author })
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('네트워크 응답이 정상이 아닙니다');
+            }
+            return response.json();
+          })
+          .then(result => {
+            console.log('서버 응답:', result);
+            window.location.href = '/';
+          })
+          .catch(error => {
+            console.error('에러:', error);
+          });
+        });
+        
+
+      </script>
+  </body>
+
+</html>

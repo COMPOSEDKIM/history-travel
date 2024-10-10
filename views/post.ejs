@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시물 확인</title>
+    <link rel="stylesheet" type="text/css" href="/stylex.css" />
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          line-height: 1.6;
+          margin: 0;
+          padding: 20px;
+          background-color: #f4f4f4;
+      }
+
+      .post-title, .post-author, .post-container {
+          background: white;
+          padding: 15px;
+          margin-bottom: 10px;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .post-title p, .post-author p {
+          margin: 0;
+      }
+      .post-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 20px;
+      }
+      .post-content {
+          flex: 2;
+      }
+      .post-image {
+          flex: 1;
+          max-width: 300px;
+      }
+      .post-image img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 5px;
+          border: 2px solid #ccc;
+      }
+      .post-content p {
+          margin-top: 0;
+      }
+      label {
+        background-color: #4e75e9;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 3px;
+        width: 100%;
+      }
+
+    </style>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXaYwwO82iGqPtEN2-PJi5tKFMwN5VFG4&callback=initMap&libraries=places&v=weekly" defer></script>
+    <script src="/mapsave.js"></script>
+</head>
+<body>
+    <div>
+        <h1>My Travel Plan</h1>
+    </div>
+    
+    <!-- <label for="titles" style="width:99%; display: block;">Title</label>
+    <div class="post-title">
+        <p><%= post.title %></p>
+    </div>
+    <label for="author" style="width:99%; display: block;">Author</label>
+    <div class="post-author">
+        <p><%= post.author %></p>
+    </div> -->
+    <div style="display: flex; align-items: center;">
+      <label for="titles" style="width:60%; display: inline-block; margin-right: 2%;">Title</label>
+      <label for="author" style="width:40%; display: inline-block;">Author</label>
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 30px;">
+      <div class="post-title" style="width:60%; display: inline-block; margin-right: 2%;">
+          <p><%= post.title %></p>
+      </div>
+      <div class="post-author" style="width:40%; display: inline-block;">
+          <p><%= post.author %></p>
+      </div>
+    </div>
+    
+
+    <div>
+        <input type="text" id="1" value="<%= post.test1 %>" style="display: none;"> 
+        <input type="text" id="2" value="<%= post.placename1 %>" style="display: none;"> 
+        <% let testValue = post.test1 %>
+        <% let placenameValue = post.placename1 %>
+    </div>
+    <div id="container" style="margin-bottom: 50px;">
+      <div id="Information">
+        <h2>Information</h2>
+        <div id="imageContainer">
+          <img id="0" src="">
+        </div>
+        <button id="prevBtn" class="hidden">◀ 이전</button>
+        <button id="nextBtn" class="hidden">다음 ▶</button>
+      <div class="review-info hidden" id="dsee">
+      <p class="restaurant bold-text" id="1" style="width: 98%;"></p>
+        <p class="reviewcontent" id="2" style="width: 98%;"></p>
+        <p class="reviewcontent" id="3" style="width: 98%;"></p>
+        <p class="reviewcontent" id="4" style="width: 98%;"></p>
+        <p class="reviewcontent" id="5" style="width: 98%;"></p>
+        <p class="reviewcontent" id="6" style="width: 98%;"></p>
+        <p class="reviewcontent" id="7" style="width: 98%;"></p>
+        <p class="reviewcontent" id="8" style="width: 98%;"></p>
+      </div>
+    </div>
+      <div id="map"></div>
+      <div id="sidebar" class="moreplan">
+        <select id="selectBox" style="width:100%;">
+          <option value="D1" style="width:100%;">day1</option>
+        </select>
+        <div class="checkbox-container">
+        <label><input type="checkbox" id="Direction" name="option">운전 경로</label>
+       </div> 
+       <div class="checkbox-container">
+       <label><input type="checkbox" id="Walk" name="option">도보 경로</label>
+      </div>
+        <ul id="D1" value="1"></ul>
+      </div>
+    </div>
+    <label for="content" style="width:99%; display: block;">Content</label>
+    <div class="post-container">
+      
+        <div class="post-content">
+          <p><%= post.content %></p>
+        </div>
+        <div class="post-image">
+          <% if (post.imagePath) { %>
+            <img src="/uploads/<%= post.imagePath %>" alt="Post Image">
+          <% } else { %>
+            <p>No image available</p>
+          <% } %>
+        </div>
+    </div>
+  </body>
+</html>

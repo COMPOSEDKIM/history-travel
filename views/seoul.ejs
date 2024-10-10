@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Marker Accessibility</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  
+
+  <body>
+    <h1><strong>My Travel Plan</strong></h1>
+    <!-- <form action="/new" method="post" enctype="multipart/form-data"></form> -->
+      <!-- <div id="container" class="custom-container">
+        <div id="map" class="custom-map"></div>
+      </div> -->
+      <div style="display: flex; align-items: center; margin-bottom: 30px;">
+        <label for="title" style="color: white; background-color: #4e75e9; padding: 5px; border-radius: 3px; margin-right: 10px; font-size: 20px;">Title</label>
+        <input type="text" id="title" name="title" required style="width: 800px; margin-right: 20px; height: 40px; box-sizing: border-box;">
+        <label for="author" style="color: white; background-color: #4e75e9; padding: 5px; border-radius: 3px; margin-right: 10px; font-size: 20px;">Author</label>
+        <input type="text" id="author" name="author" required style="width: 400px; height: 40px; box-sizing: border-box;">
+      </div>
+      
+      <!-- <div>
+        <div>
+          <label for="titles" style="color:#4e75e9;">Title </label>
+          <input type="text" id="title" name="title" required style="width: 500px; margin-bottom: 10px;">
+        </div>
+
+        <div>
+          <label for="author" style="color:#4e75e9;">Author </label>
+          <input type="text" id="author" name="author" required style="width: 500px; height: 30px; margin-bottom: 30px;">
+        </div>
+      </div>   -->
+      <div>
+        <input type="text" id="testdb" style="display: none;">
+        <input type="text" id="placenamedb" style="display: none;">
+      </div>
+
+      <div class="pac-card" id="pac-card">
+        <div>
+          <div id="titles">Place Search</div>
+          <div id="type-selector" class="pac-controls" style="display: none;"></div>
+          <br />
+          <div id="strict-bounds-selector" class="pac-controls">
+            <input type="checkbox" id="use-location-bias" value="" checked  style="display: none;"/>
+            
+          </div>
+        </div>
+        <div id="pac-container">
+          <input id="pac-input" type="text" placeholder="Enter a location" />
+          <button id="search-button">Search</button>
+        </div>
+       
+        
+        
+      </div>
+
+      <div id="container" style="margin-bottom: 50px;">
+        <div id="Information">
+          <h2>Information</h2>
+          <button id="add">add Marker</button>
+          <div id="imageContainer">
+            <img id="0" src="">
+          </div>
+          <button id="prevBtn" class="hidden">◀ 이전</button>
+          <button id="nextBtn" class="hidden">다음 ▶</button>
+
+          
+        <div class="review-info hidden" id="dsee">
+        <p class="restaurant bold-text" id="1" style="width: 98%;"></p>
+          <p class="reviewcontent" id="2" style="width: 98%;"></p>
+          <p class="reviewcontent" id="3" style="width: 98%;"></p>
+          <p class="reviewcontent" id="4" style="width: 98%;"></p>
+          <p class="reviewcontent"id="5" style="width: 98%;"></p>
+          <p class="reviewcontent"id="6" style="width: 98%;"></p>
+          <p class="reviewcontent" id="7" style="width: 98%;"></p>
+          <p class="reviewcontent" id="8" style="width: 98%;"></p>
+        </div>
+      </div>
+
+        <div id="map"></div>
+        <div id="sidebar" class="moreplan">
+          <select id="selectBox" style="width: 100%;">
+            <option value="D1">day1</option>
+          </select>
+          <div class="checkbox-container">
+          <label><input type="checkbox" id="Direction" name="option">운전 경로</label>
+         </div> 
+         <div class="checkbox-container">
+         <label><input type="checkbox" id="Walk" name="option">도보 경로</label>
+        </div>
+          <button id="addplan" style="display:inline;">일정 추가</button>
+          <ul id="D1" value="1"></ul>
+
+        </div>
+        <div id="sidebar">
+          <h2>Recommend</h2>
+          <select id="sortR" style="width: 100%;">
+            <option value="default">기본 순</option>
+            <option value="num">별점 높은 순</option>
+            <option value="many">리뷰 많은 순</option>
+          </select>
+          <ul id="places"></ul>
+        </div>
+        <div id="infowindow-content">
+          <span id="place-name" class="title" style="display: none;"></span><br />
+          <span id="place-address" style="display: none;"></span>
+        </div>
+
+      </div>
+
+      <div id="rightClickMenu">
+        <div class="item" number="1">Near Restaurant</div>
+        <div class="item" number="2">Near Park</div>
+        <div class="item" number="3">Reset</div>
+        <div class="item" number="4">Delete</div>
+      </div>
+
+      <input type="text" id="testdb" style="display: none;">
+      <input type="text" id="placenamedb" style="display: none;">
+      <!-- <input type="text" id="outputField"> -->
+    <input type="button" value="night" class="dayNightButton" style="display: none;">
+    <input type="button" value="false" class="resetbutton" style="display: none;">
+
+    <div id="result"></div>
+          
+    <div class="selected-file" id="selectedFile"></div>
+
+    <div>
+      <label for="content">Contents</label>
+      <textarea id="content" name="content" required></textarea>
+    </div>
+
+    <style>
+      /* 입력창 스타일링 */
+      textarea {
+        width: 100%;
+        height: 200px; /* 기본 높이 설정 */
+        resize: vertical; /* 세로로만 크기 조정 가능하도록 설정 */
+      }
+    </style>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f9f9f9;
+      }
+  
+      h1 {
+        color: #333;
+      }
+  
+      .input-container {
+        margin-bottom: 15px;
+      }
+  
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+  
+      textarea {
+        width: 100%;
+        height: 200px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+        resize: vertical;
+      }
+  
+      .custom-button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+  
+      .custom-button:hover {
+        background-color: #45a049;
+      }
+  
+      .back-button {
+        background-color: #4d4c4c;
+      }
+  
+      .back-button:hover {
+        background-color: #e53935;
+      }
+  
+      .file-input-container {
+        margin-top: 20px;
+      }
+  
+      .file-input-container label {
+        font-weight: normal;
+      }
+    </style>
+
+    <div>
+      <label for="image">사진 첨부</label>
+      <input type="file" id="image" name="image" accept="image/*">
+    </div>
+
+
+    <button type="button" id="submitBtn">완료</button>
+    <a href="/">
+      <button type="button" class="back-button" style="background-color: gray;">이전으로</button>
+    </a>
+
+      <link rel="stylesheet" type="text/css" href="./stylel.css" />
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXaYwwO82iGqPtEN2-PJi5tKFMwN5VFG4&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+    <script src="./mapseoul.js">
+        
+      // let test1[]
+      // let outputField= document.getElementById("test1");
+   
+      // Proxy 객체를 사용하여 배열 변경 감지
+      let arrayHandler = {
+        set: function (target, property, value) {
+          target[property] = value;
+          displayArrayInInput();
+          return true;
+        }
+      }; //O
+      test1 = new Proxy(test1, arrayHandler); //O
+
+      function displayArrayInInput() {
+        outputField.value = JSON.stringify(test1); // 배열을 JSON 문자열로 변환하여 입력 필드에 표시
+        } //O
+
+
+        function logOutputField() { // 콘솔에 출력
+        let biobio = document.getElementById("outputField").value;
+
+        let sss = [];
+        sss.push(biobio);
+        console.log(sss)
+        }
+    </script>
+<!--       
+      <div class="selected-file" id="selectedFile"></div>
+
+      <button type="button" id="submitBtn">완료</button>
+      <a href="/"><button type="button" class="back-button">이전으로</button></a> -->
+      
+      <script>    
+
+        // 페이지 로딩 완료 시 데이터 출력 함수 실행
+        document.getElementById('submitBtn').addEventListener('click', () => {
+          const title = document.getElementById('title') ? document.getElementById('title').value : '';
+          const author = document.getElementById('author') ? document.getElementById('author').value: '';
+          const test1 = document.getElementById('testdb')? document.getElementById('testdb').value:'';
+          const placename1 = document.getElementById('placenamedb')? document.getElementById('placenamedb').value:'';
+          const content = document.getElementById('content') ? document.getElementById('content').value: '';
+          const image = document.getElementById('image').files[0];
+
+          const formData = new FormData();
+          formData.append('title', title);
+          formData.append('author', author);
+          formData.append('test1', test1);
+          formData.append('placename1', placename1);
+          formData.append('content', content);
+          if (image) {
+            formData.append('image', image);
+          }
+
+          fetch('/new', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(result => {
+            console.log('Server response:', result);
+            if (result.success) {
+              window.location.href = '/';
+            } else {
+              alert('Error: ' + result.message);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Error occurred: ' + error.message);
+          });
+        });
+      </script>
+      <style>
+        #title {
+          border: 2px solid #4e75e9;
+          padding: 10px;
+          border-radius: 5px; /* 선택 사항: 둥근 모서리를 원하면 사용 */
+        }
+
+        #author {
+          border: 2px solid #4e75e9;
+          padding: 10px;
+          border-radius: 5px; /* 선택 사항: 둥근 모서리를 원하면 사용 */
+        }
+        #content {
+            border: 2px solid #4e75e9;
+            padding: 10px;
+            border-radius: 5px; /* 선택 사항: 둥근 모서리를 원하면 사용 */
+        }
+
+        label[for="content"] {
+          font-weight: bold; /* 굵은 글꼴 */
+          color: white; /* 흰색 텍스트 */
+          background-color: #4e75e9; /* 파란색 배경 */
+          font-size: 16px; /* 글꼴 크기 */
+          display: block; /* 블록 요소로 설정하여 레이블과 텍스트 영역 사이에 공간 추가 */
+          padding: 5px; /* 레이블 내부 여백 */
+          margin-bottom: 5px; /* 텍스트 영역과의 간격 */
+          border-radius: 3px; /* 선택 사항: 둥근 모서리를 원하면 사용 */
+      }
+    </style>
+  </body>
+
+</html>

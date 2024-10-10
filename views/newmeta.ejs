@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8">
+  <title>Advanced Marker Accessibility</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+  <body>
+    <h1>My Travel Plan</h1>
+    <!-- <form action="/new" method="post" enctype="multipart/form-data"></form> -->
+      <!-- <div id="container" class="custom-container">
+        <div id="map" class="custom-map"></div>
+      </div> -->
+      <div>
+        <label for="titles">Title </label>
+        <input type="text" id="title" name="title" required>
+      </div>
+
+      <div>
+        <label for="author">Author </label>
+        <input type="text" id="author" name="author" required>
+      </div>
+      <div>
+        <input type="text" id="testdb" style="display: none;">
+        <input type="text" id="placenamedb" style="display: none;">
+      </div>
+
+
+        <!-- <link rel="stylesheet" type="text/css" href="/style.css" />
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXaYwwO82iGqPtEN2-PJi5tKFMwN5VFG4&callback=initMap&libraries=places&v=weekly" defer></script>
+      <script src="/index.js"></script> -->
+
+      <div class="pac-card" id="pac-card">
+        <div>
+          <div id="titles">Place Search</div>
+          <div id="type-selector" class="pac-controls" style="display: none;"></div>
+          <br />
+          <div id="strict-bounds-selector" class="pac-controls">
+            <input type="checkbox" id="use-location-bias" value="" checked  style="display: none;"/>
+            
+          </div>
+        </div>
+        <div id="pac-container">
+          <input id="pac-input" type="text" placeholder="Enter a location" />
+          <button id="search-button">Search</button>
+        </div>
+       
+        
+        
+      </div>
+
+      <div id="container">
+        <div id="Information">
+          <h2>Information</h2>
+          <button id="add">add Marker</button>
+          <div id="imageContainer">
+            <img id="0" src="">
+          </div>
+          <button id="prevBtn" class="hidden">◀ 이전</button>
+          <button id="nextBtn" class="hidden">다음 ▶</button>
+
+          
+        <div class="review-info hidden" id="dsee">
+        <p class="restaurant bold-text" id="1" style="width: 98%;"></p>
+          <p class="reviewcontent" id="2" style="width: 98%;"></p>
+          <p class="reviewcontent" id="3" style="width: 98%;"></p>
+          <p class="reviewcontent" id="4" style="width: 98%;"></p>
+          <p class="reviewcontent"id="5" style="width: 98%;"></p>
+          <p class="reviewcontent"id="6" style="width: 98%;"></p>
+          <p class="reviewcontent" id="7" style="width: 98%;"></p>
+          <p class="reviewcontent" id="8" style="width: 98%;"></p>
+        </div>
+      </div>
+
+        <div id="map"></div>
+        <div id="sidebar" class="moreplan">
+          <select id="selectBox" style="width: 100%;">
+            <option value="D1">day1</option>
+          </select>
+          <div class="checkbox-container">
+          <label><input type="checkbox" id="Direction" name="option">운전 경로</label>
+         </div> 
+         <div class="checkbox-container">
+         <label><input type="checkbox" id="Walk" name="option">도보 경로</label>
+        </div>
+          <button id="addplan" style="display:inline;">일정 추가</button>
+          <ul id="D1" value="1"></ul>
+
+        </div>
+        <div id="sidebar">
+          <h2>Recommend</h2>
+          <select id="sortR" style="width: 100%;">
+            <option value="default">기본 순</option>
+            <option value="num">별점 높은 순</option>
+            <option value="many">리뷰 많은 순</option>
+          </select>
+          <ul id="places"></ul>
+        </div>
+        <div id="infowindow-content">
+          <span id="place-name" class="title" style="display: none;"></span><br />
+          <span id="place-address" style="display: none;"></span>
+        </div>
+
+      </div>
+
+      <div id="rightClickMenu">
+        <div class="item" number="1">Near Restaurant</div>
+        <div class="item" number="2">Near Park</div>
+        <div class="item" number="3">Reset</div>
+        <div class="item" number="4">Delete</div>
+      </div>
+
+      <input type="text" id="testdb" style="display: none;">
+      <input type="text" id="placenamedb" style="display: none;">
+      <!-- <input type="text" id="outputField"> -->
+    <input type="button" value="night" class="dayNightButton" style="display: none;">
+    <input type="button" value="false" class="resetbutton" style="display: none;">
+
+    <div id="result"></div>
+          
+    <div class="selected-file" id="selectedFile"></div>
+
+    <div>
+      <label for="content">Contents</label>
+      <textarea id="content" name="content" required></textarea>
+    </div>
+    <style>
+      /* 입력창 스타일링 */
+      textarea {
+        width: 100%;
+        height: 200px; /* 기본 높이 설정 */
+        resize: vertical; /* 세로로만 크기 조정 가능하도록 설정 */
+      }
+    </style>
+
+    <button type="button" id="submitBtn">완료</button>
+    <a href="/"><button type="button" class="back-button">이전으로</button></a>
+
+      <link rel="stylesheet" type="text/css" href="./stylel.css" />
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXaYwwO82iGqPtEN2-PJi5tKFMwN5VFG4&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+    <script src="./index.js">
+      // let test1[]
+      // let outputField= document.getElementById("test1");
+   
+      // Proxy 객체를 사용하여 배열 변경 감지
+      let arrayHandler = {
+        set: function (target, property, value) {
+          target[property] = value;
+          displayArrayInInput();
+          return true;
+        }
+      }; //O
+      test1 = new Proxy(test1, arrayHandler); //O
+
+      function displayArrayInInput() {
+        outputField.value = JSON.stringify(test1); // 배열을 JSON 문자열로 변환하여 입력 필드에 표시
+        } //O
+
+
+        function logOutputField() { // 콘솔에 출력
+        let biobio = document.getElementById("outputField").value;
+
+        let sss = [];
+        sss.push(biobio);
+        console.log(sss)
+        }
+    </script>
+<!--       
+      <div class="selected-file" id="selectedFile"></div>
+
+      <button type="button" id="submitBtn">완료</button>
+      <a href="/"><button type="button" class="back-button">이전으로</button></a> -->
+      
+      <script>    
+
+        // 페이지 로딩 완료 시 데이터 출력 함수 실행
+        document.getElementById('submitBtn').addEventListener('click', () => {
+          const title = document.getElementById('title') ? document.getElementById('title').value : '';
+          const author = document.getElementById('author') ? document.getElementById('author').value: '';
+          const test1 = document.getElementById('testdb')? document.getElementById('testdb').value:'';
+          const placename1 = document.getElementById('placenamedb')? document.getElementById('placenamedb').value:'';
+          const content = document.getElementById('content') ? document.getElementById('content').value: '';
+          // Get array values
+          // const test1Element = document.getElementById('test1');
+          // const test1 = JSON.parse(test1Element.value);
+
+          // const placenameElement = document.getElementById('placename');
+          // const placename = JSON.parse(placenameElement.value);
+
+          // const markerlistElement = document.getElementById('markerlist');
+          // const markerlist = JSON.parse(markerlistElement.value);
+
+          // const waypsElement = document.getElementById('wayps');
+          // const wayps = JSON.parse(waypsElement.value);
+
+
+          const jsonData ={
+            title,
+            author,
+            test1,
+            placename1,
+            content
+            // markerlist,
+            // wayps
+          };
+        
+
+      // JSON 데이터 생성
+          //JSON 데이터 생성
+            // 이후 가져온 데이터를 활용
+          console.log('test1:', test1);
+          console.log('placename1:', placename1);
+          // console.log('placename:', placename);
+          // console.log('markerlist:', markerlist);
+          // console.log('ways:', wayps);
+
+          // fetch를 호출하고 응답을 처리하는 부분
+          fetch('/new', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData)
+            // body: JSON.stringify({ title, author })
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('네트워크 응답이 정상이 아닙니다');
+            }
+            return response.json();
+          })
+          .then(result => {
+            console.log('서버 응답:', result);
+            window.location.href = '/';
+          })
+          .catch(error => {
+            console.error('에러:', error);
+          });
+        });
+        
+
+      </script>
+      <!-- <div>
+        <label for="content">Contents</label>
+        <textarea id="content" name="content" required></textarea>
+      </div>
+      <style>
+        /* 입력창 스타일링 */
+        textarea {
+          width: 100%;
+          height: 200px; /* 기본 높이 설정 */
+          resize: vertical; /* 세로로만 크기 조정 가능하도록 설정 */
+        }
+      </style> -->
+
+  </body>
+
+</html>

@@ -1,0 +1,81 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Website</title>
+    <!-- Add your styles or link to your CSS file here -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+    
+        h1 {
+            color: #ffffff;
+            background-color: #3498db;
+            padding: 15px;
+            border-radius: 5px;
+            
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+    
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(25, 10, 60, 0.1);
+        }
+    
+        a, span {
+            color: #4a348b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    
+        a:hover, span:hover {
+            text-decoration: underline;
+        }
+    
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    
+        button:hover {
+            background-color: #2077c8;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Travel Plan</h1>
+    <ul>
+        <% for (let i = 0; i < posts.length; i++) { %>
+            <li>
+                <a href="/post/<%= i %>">여행지:<%= posts[i].title %></a>
+                <span>작성자: <%= posts[i].author %></span>
+            </li>
+        <% } %>
+    </ul>
+
+    <a href="/new"><button type="button">새 게시물 작성</button></a>
+
+    <script>
+        // Your client-side scripts go here
+    </script>
+</body>
+</html>

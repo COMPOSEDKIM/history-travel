@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Advanced Marker Accessibility</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+  </head>
+  <body>
+
+      <div id="container">
+        <div id="Information">
+          <h2>Information</h2>
+          <div id="imageContainer">
+            <img id="0" src="">
+          </div>
+          <button id="prevBtn" class="hidden">◀ 이전</button>
+          <button id="nextBtn" class="hidden">다음 ▶</button>
+
+          
+        <div class="review-info hidden" id="dsee">
+        <p class="restaurant bold-text" id="1"></p>
+          <p class="reviewcontent" id="2"></p>
+          <p class="reviewcontent" id="3"></p>
+          <p class="reviewcontent" id="4"></p>
+          <p class="reviewcontent"id="5"></p>
+          <p class="reviewcontent"id="6"></p>
+          <p class="reviewcontent" id="7"></p>
+          <p class="reviewcontent" id="8"></p>
+        </div>
+      </div>
+
+        <div id="map"></div>
+        <div id="sidebar" class="moreplan">
+          <select id="selectBox" style="width:100%;">
+            <option value="D1" style="width:100%;">day1</option>
+          </select>
+          <div class="checkbox-container">
+          <label><input type="checkbox" id="Direction" name="option">운전 경로</label>
+         </div> 
+         <div class="checkbox-container">
+         <label><input type="checkbox" id="Walk" name="option">도보 경로</label>
+        </div>
+          <ul id="D1" value="1"></ul>
+
+        </div>
+
+      </div>
+
+      <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXaYwwO82iGqPtEN2-PJi5tKFMwN5VFG4&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+    <script src="./mapsave.js"></script>
+  </body>
+</html>
