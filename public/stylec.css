@@ -1,0 +1,268 @@
+ /**
+       * @license
+       * Copyright 2019 Google LLC. All Rights Reserved.
+       * SPDX-License-Identifier: Apache-2.0
+       */
+      /* 
+       * Always set the map height explicitly to define the size of the div element
+       * that contains the map. 
+       */
+       #map {
+        flex-basis: 0;
+        flex-grow: 4;
+        height: 100%;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #description {
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+      }
+
+      #infowindow-content .title {
+        font-weight: bold;
+      }
+
+      #infowindow-content {
+        display: none;
+      }
+
+      #map #infowindow-content {
+        display: inline;
+      }
+
+      .pac-card {
+        background-color: #fff;
+        border: 0;
+        border-radius: 2px;
+        box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+        margin: 10px;
+        padding: 0 0.5em;
+        font: 400 18px Roboto, Arial, sans-serif;
+        overflow: hidden;
+        font-family: Roboto;
+        padding: 0;
+      }
+
+      #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+      }
+
+      .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+      }
+
+      .pac-controls label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      #titles {
+        color: #fff;
+        background-color: #4d90fe;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+      }
+      #title {
+        color: #fff;
+        background-color: #fff;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+    }
+
+h1 {
+  color: #ffffff;
+  background-color: #4d90fe; /* 배경색을 변경하려면 이 부분을 수정하세요 */
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+  
+#container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#sidebar, #Information {
+  flex-basis: 5rem;
+  flex-grow: 1;
+  padding: 1rem;
+  max-width: 30rem;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+}
+/* 수정한 스타일 */
+p {
+  font-weight: bold; /* 굵게 만듭니다. */
+  font-size: 18px; /* 폰트 크기를 조절합니다. */
+}
+#sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 0 0 5px 0;
+  flex-grow: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
+  flex-grow: 1;
+}
+
+li {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+li:nth-child(odd) {
+  background-color: #fcfcfc;
+}
+
+#add {
+  width: 100%;
+  padding: 1rem;
+  flex-grow: 0;
+  cursor: pointer;
+  background: #1a73e8;
+  font-size: 1.5rem;
+  color: white;
+  border: none;
+}
+
+#add:hover {
+  color: #c5d4f0;
+}
+
+#add:disabled {
+  background-color: #9fc1ee;
+  color: #c5d4f0;
+  cursor: auto;
+}
+
+#addplan {
+  width: 100%;
+  padding: 1rem;
+  flex-grow: 0;
+  cursor: pointer;
+  background: #1a73e8;
+  font-size: 1.5rem;
+  color: white;
+  border: none;
+}
+
+#addplan:hover {
+  color: #c5d4f0;
+}
+
+#addplan:disabled {
+  background-color: #9fc1ee;
+  color: #c5d4f0;
+  cursor: auto;
+}
+
+#rightClickMenu {
+  position: fixed;
+  z-index: 10000;
+  width: 150px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.15);
+  padding: 4px;
+  display: none;
+ }
+
+ #rightClickMenu .item {
+  padding: 8px 10px;
+  font-size: 12px;
+  color: black;
+  cursor: pointer;
+  border-radius: inherit;
+ }
+ #rightClickMenu .item:hover {
+  background-color: gainsboro;
+ }
+
+ .hidden {
+  display: none;
+}
+#imageContainer {
+  text-align: center;
+}
+.back-button {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+  text-decoration: none;
+  display: inline-block;
+}
+.back-button:hover {
+  background-color: #2077c8;
+}
+
+#submitBtn {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+  display: inline-block;
+
+}
+/* 추가한 스타일 */
+#submitBtn {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+  display: inline-block;
+  /* margin-left: auto; */ /* 이 부분을 주석 처리하거나 삭제합니다 */
+}
+
